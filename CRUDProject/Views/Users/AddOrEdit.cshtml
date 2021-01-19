@@ -1,0 +1,39 @@
+﻿@model CRUDProject.Models.UserData
+@{
+    ViewBag.Title = "AddOrEdit";
+}
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.User_Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Name)
+            @Html.EditorFor(model => model.User_Name)
+            @Html.ValidationMessageFor(model => model.User_Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Age)
+            @Html.EditorFor(model => model.User_Age)
+            @Html.ValidationMessageFor(model => model.User_Age)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.User_Adress)
+            @Html.EditorFor(model => model.User_Adress)
+            @Html.ValidationMessageFor(model => model.User_Adress)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-success" />
+            @Html.ActionLink("Back", "index", "Users", new { @class="btn btn-info"})
+        </div>
+    }
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+}
+

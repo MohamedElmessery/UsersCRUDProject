@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CRUDProject.Models.UserData>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Users List</h2>
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Users")" class="btn btn-info"><i class="fa fa-plus"></i> Create New</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead class="table-heading">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User_Adress)
+            </th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User_Adress)
+                </td>
+                <td>
+                    <a href="@Url.Action("AddOrEdit", "Users", new { id = item.User_Id})" class="btn btn-success"><i class="fa fa-pencil"></i>  Edit</a>
+                    <a onclick="Delete(@item.User_Id)" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage ='@TempData["SuccessMessage"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        });
+
+        function Delete(id) {
+            alertify.confirm('Delete','Are You Sure to Delete this Record ?',function(){
+                window.location.href ='@Url.Action("Delete","Users")/'+id;
+            },null );
+        }
+    </script>
+}
